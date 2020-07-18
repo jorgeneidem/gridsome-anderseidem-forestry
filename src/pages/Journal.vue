@@ -1,6 +1,6 @@
 <template>
   <Layout>
-
+    <!--
     <div class="container">
       <div class="journal-hero">
         <h1 class="journal-header">
@@ -8,10 +8,11 @@
         </h1>
       </div>
     </div>
+    -->
 
-    <g-link 
+    <g-link
       :to="item.node.path"
-      v-for="item in $page.posts.edges" 
+      v-for="item in $page.posts.edges"
       :key="item.node.id"
       class="journal-post"
     >
@@ -20,7 +21,6 @@
         <p class="journal-excerpt">{{ item.node.excerpt }}</p>
       </div>
     </g-link>
-      
   </Layout>
 </template>
 
@@ -40,8 +40,7 @@ query Journal {
 </page-query>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style scoped>
@@ -51,7 +50,7 @@ export default {
 .journal-hero {
   padding: 4rem 0;
   text-align: center;
-  color: var(--color-base-1);
+  color: var(--color-contrast-1);
 }
 .journal-header {
   font-size: 3rem;
@@ -65,6 +64,10 @@ export default {
   text-decoration: none;
   transition: background 0.5s ease;
 }
+a.journal-post {
+  backdrop-filter: invert(3%);
+}
+
 .journal-post > * {
   transition: transform 0.5s ease;
 }

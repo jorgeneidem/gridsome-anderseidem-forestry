@@ -1,23 +1,22 @@
 <template>
   <div class="layout" :class="{ 'sticky-header': $route.path === '/' }">
     <Header />
-    <slot/>
+    <slot />
     <Footer />
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default {
   components: {
     Header,
-    Footer
-  }
-}
+    Footer,
+  },
+};
 </script>
-
 
 <style>
 * {
@@ -29,11 +28,13 @@ body {
   --color-base-1: rgb(243, 243, 243);
   --color-contrast: rgb(0, 0, 0);
   --color-contrast-1: rgb(43, 43, 43);
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  margin:0;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
   padding: 0;
   font-size: 16px;
-  background: var(--color-base);
+  line-height: 1.45;
+  background: var(--color-base-1);
   color: var(--color-contrast);
   transition: background 0.5s ease;
 }
@@ -45,8 +46,12 @@ body.dark {
   --color-contrast-1: rgb(243, 243, 243);
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4 {
   letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .layout {
@@ -54,13 +59,13 @@ h1 {
 }
 
 .layout.sticky-header {
-  padding: 6rem 0 0 0;
+  padding: 4rem 0 0 0;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
 }
 
 @media (min-width: 860px) {
@@ -80,6 +85,6 @@ img {
 .label {
   display: block;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 </style>

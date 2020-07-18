@@ -1,19 +1,21 @@
 <template>
   <Layout>
     <div class="project">
-
       <div class="container">
-
         <div class="project-header">
+          <g-image
+            :src="$page.post.thumbnail"
+            :alt="$page.post.title"
+            class="project-thumbnail"
+          />
           <h1 class="project-title" v-html="$page.post.title" />
           <div class="project-info">
-
             <div class="categories-container">
               <div class="categories">
-                <span class="label">Categories</span>
-                <span 
+                <span class="label">Rolle</span>
+                <span
                   class="category"
-                  v-for="(category, index) in $page.post.categories" 
+                  v-for="(category, index) in $page.post.categories"
                   :key="index"
                   v-text="category"
                 />
@@ -21,16 +23,14 @@
             </div>
 
             <div class="year-container">
-              <span class="label">Year</span>
-              <div v-html="$page.post.date"/>
+              <span class="label">År</span>
+              <div v-html="$page.post.date" />
             </div>
           </div>
         </div>
 
         <div v-html="$page.post.content" class="content" />
-
       </div>
-
     </div>
   </Layout>
 </template>
@@ -38,6 +38,7 @@
 <page-query>
 query ProjectPost ($path: String!) {
   post: projectPost (path: $path) {
+    thumbnail
     title
     date (format: "YYYY")
     content
@@ -50,24 +51,48 @@ query ProjectPost ($path: String!) {
 
 <script>
 export default {
-  metaInfo () {
+  metaInfo() {
     return {
       title: this.$page.post.title,
       bodyAttrs: {
-        style: `background-color: ${this.$page.post.project_bg_color ? this.$page.post.project_bg_color : 'var(--color-base)'}; color: ${this.$page.post.project_fg_color ? this.$page.post.project_fg_color : 'var(--color-contrast)'}`
-      }
-    }
-  }
-}
+        style: `background-color: ${
+          this.$page.post.project_bg_color
+            ? this.$page.post.project_bg_color
+            : "var(--color-base)"
+        }; color: ${
+          this.$page.post.project_fg_color
+            ? this.$page.post.project_fg_color
+            : "var(--color-contrast)"
+        }`,
+      },
+    };
+  },
+};
 </script>
 
 <style scoped>
 .project-header {
-  padding: 20vh 0 4rem 0;
+  padding: 20vh 0 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 0.25rem 1rem;
 }
+@media (max-width: 600px) {
+  .project-header {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-thumbnail {
+  grid-row: 1 / span 2;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  align-self: stretch;
+}
+
 .project-title {
   font-size: 4rem;
-  margin: 0 0 4rem 0;
+  margin: 0 0 0.5rem 0;
   padding: 0;
 }
 .project-info {
@@ -82,9 +107,19 @@ export default {
   margin: 0;
 }
 .category:after {
-  content: ', '
+  content: ", ";
 }
 .category:last-of-type:after {
-  content: '';
+  content: "";
+}
+</style>
+
+<style>
+.project .content p:first-child {
+  margin-bottom: 3rem;
+  max-width: 640px;
+}
+.project .container p img {
+  margin-bottom: 2rem;
 }
 </style>
